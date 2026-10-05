@@ -149,22 +149,12 @@ jobs:
           cat toolchain.json
           echo "::endgroup::"
 
-      # ---------------------------------------------------------------------
-      # Step 5: Install JDK (chosen dynamically by setup step)
-      # ---------------------------------------------------------------------
-      - name: Set up JDK (detected version)
-        uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "${{ steps.toolchain.outputs.jdk_version }}"
-          cache: "gradle"
-
-      - name: Set up JDK 8 (legacy fallback)
-        if: steps.toolchain.outputs.jdk_version == '8'
-        uses: actions/setup-java@v4
-        with:
-          distribution: "temurin"
-          java-version: "8"
+      # --- name: Set up JDK (detected version)
+  uses: actions/setup-java@v4
+  with:
+    distribution: "temurin"
+    java-version: "17"
+    cache: "gradle"
 
       # ---------------------------------------------------------------------
       # Step 6: Set up Android SDK
